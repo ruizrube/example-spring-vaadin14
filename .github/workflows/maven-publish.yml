@@ -31,7 +31,7 @@ jobs:
     - name: set environment variables
       uses: allenevans/set-env@v1.0.0
       with:
-        JAR_NAME: ${{ steps.latest_version.outputs.latest_tag }}
+        JAR_NAME: '${{ steps.latest_version.outputs.latest_tag }}.jar'
           
     - name: Example of consumption of the output
       env:
@@ -43,7 +43,7 @@ jobs:
 
     - name: Build with Maven
       working-directory: ./example-spring-vaadin14
-      run: mvn -B package -Djar.finalName=${JAR_NAME}.jar
+      run: mvn -B package -Djar.finalName=${JAR_NAME}
 
     - name: Publish to GitHub Packages Apache Maven
       working-directory: ./example-spring-vaadin14
@@ -59,4 +59,4 @@ jobs:
         application_name: example-spring-vaadin14
         environment_name: ExampleSpringVaadin14-env
         region: us-west-3
-        deployment_package: target/myApp$LATEST.jar
+        deployment_package: target/${JAR_NAME}

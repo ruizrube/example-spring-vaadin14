@@ -20,16 +20,32 @@ jobs:
         java-version: 1.8
         server-id: github # Value of the distributionManagement/repository/id field of the pom.xml
         settings-path: ${{ github.workspace }} # location for the settings.xml file
-        
+     
+    - name: Get Latest Release
+      id: latest_version
+      uses: abatilo/release-info-action@v1.3.0
+      with:
+        owner: abatilo
+        repo: release-info-action
+    
+    - name: Example of consumption of the output
+      env:
+        LATEST: ${{ steps.latest_version.outputs.latest_tag }}
+        LATEST_DATE: ${{ steps.latest_version.outputs.latest_tag_published_at }}
+      run: |
+        echo "Version $LATEST was released at $LATEST_DATE"
+          
 
     - name: Build with Maven
       working-directory: ./example-spring-vaadin14
-      run: mvn -B package
+      run: mvn -B package -Djar.finalName=myApp$LATEST
 
     - name: Publish to GitHub Packages Apache Maven
+      working-directory: ./example-spring-vaadin14
       run: mvn deploy -s $GITHUB_WORKSPACE/settings.xml
       env:
         GITHUB_TOKEN: ${{ github.token }}
+      
     - name: Deploy to EB
       uses: einaregilsson/beanstalk-deploy@v11
       with:
@@ -38,4 +54,4 @@ jobs:
         application_name: example-spring-vaadin14
         environment_name: ExampleSpringVaadin14-env
         region: us-west-3
-        deployment_package: myApp.zip
+        deployment_package: target/myApp.zip

@@ -31,7 +31,7 @@ jobs:
     - name: set environment variables
       uses: allenevans/set-env@v1.0.0
       with:
-        JAR_NAME: '${{ steps.latest_version.outputs.latest_tag }}.jar'
+        JARO_NAME: '${{ steps.latest_version.outputs.latest_tag }}.jar'
           
     - name: Example of consumption of the output
       env:
@@ -42,6 +42,8 @@ jobs:
           
 
     - name: Build with Maven
+      env:
+        LATEST: ${{ steps.latest_version.outputs.latest_tag }}
       working-directory: ./example-spring-vaadin14
       run: mvn -B package -Djar.finalName=$LATEST.jar
 
@@ -52,6 +54,8 @@ jobs:
         GITHUB_TOKEN: ${{ github.token }}
       
     - name: Deploy to EB
+      env:
+        LATEST: ${{ steps.latest_version.outputs.latest_tag }}
       uses: einaregilsson/beanstalk-deploy@v11
       with:
         aws_access_key: ${{ secrets.AWS_ACCESS_KEY }}
@@ -59,4 +63,4 @@ jobs:
         application_name: example-spring-vaadin14
         environment_name: ExampleSpringVaadin14-env
         region: us-west-3
-        deployment_package: target/${{LATEST}}
+        deployment_package: target/$LATEST

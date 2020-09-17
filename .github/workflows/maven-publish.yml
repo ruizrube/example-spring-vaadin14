@@ -25,9 +25,14 @@ jobs:
       id: latest_version
       uses: abatilo/release-info-action@v1.3.0
       with:
-        owner: abatilo
-        repo: release-info-action
+        owner: ruizrube
+        repo: example-spring-vaadin14
     
+    - name: set environment variables
+      uses: allenevans/set-env@v1.0.0
+      with:
+        JAR_NAME: ${{ steps.latest_version.outputs.latest_tag }}
+          
     - name: Example of consumption of the output
       env:
         LATEST: ${{ steps.latest_version.outputs.latest_tag }}
@@ -38,7 +43,7 @@ jobs:
 
     - name: Build with Maven
       working-directory: ./example-spring-vaadin14
-      run: mvn -B package -Djar.finalName=myApp$LATEST.jar
+      run: mvn -B package -Djar.finalName=${JAR_NAME}.jar
 
     - name: Publish to GitHub Packages Apache Maven
       working-directory: ./example-spring-vaadin14

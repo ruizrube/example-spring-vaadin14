@@ -45,7 +45,7 @@ jobs:
       env:
         LATEST: ${{ steps.latest_version.outputs.latest_tag }}
       working-directory: ./example-spring-vaadin14
-      run: mvn -B package -Djar.finalName=app.jar
+      run: mvn -B package
 
     - name: Publish to GitHub Packages Apache Maven
       working-directory: ./example-spring-vaadin14
@@ -64,4 +64,4 @@ jobs:
         environment_name: ExampleSpringVaadin14-env
         version_label: 12345
         region: eu-west-3
-        deployment_package: target/app.jar
+        deployment_package: target/example-spring-vaadin14-1.0-SNAPSHOT.jar

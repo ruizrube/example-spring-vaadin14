@@ -43,7 +43,7 @@ jobs:
 
     - name: Build with Maven
       working-directory: ./example-spring-vaadin14
-      run: mvn -B package -Djar.finalName=${JAR_NAME}
+      run: mvn -B package -Djar.finalName=$LATEST.jar
 
     - name: Publish to GitHub Packages Apache Maven
       working-directory: ./example-spring-vaadin14
@@ -59,4 +59,4 @@ jobs:
         application_name: example-spring-vaadin14
         environment_name: ExampleSpringVaadin14-env
         region: us-west-3
-        deployment_package: target/${JAR_NAME}
+        deployment_package: target/${{LATEST}}

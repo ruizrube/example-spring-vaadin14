@@ -22,7 +22,7 @@ public class HelloWorldView extends HorizontalLayout {
 
     public HelloWorldView() {
         setId("hello-world-view");
-        name = new TextField("What's your name?");
+        name = new TextField("What's your name? Tell me");
         sayHello = new Button("Say hello");
         add(name, sayHello);
         setVerticalComponentAlignment(Alignment.END, name, sayHello);

@@ -41,7 +41,7 @@ jobs:
           
     - name: Build and package with Maven
       working-directory: ./example-spring-vaadin14
-      run: mvn -B package
+      run: mvn -B package -Pproduction
    
     - name: Analyze with sonar
       working-directory: ./example-spring-vaadin14

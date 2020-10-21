@@ -10,13 +10,15 @@
 	<packaging>jar</packaging>
 
 	<properties>
-	 <maven.compiler.source>11</maven.compiler.source>
-    <maven.compiler.target>11</maven.compiler.target>
-		<!--  <maven.compiler.source>1.8</maven.compiler.source>   -->
+		<maven.compiler.source>11</maven.compiler.source>
+		<maven.compiler.target>11</maven.compiler.target>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
 		<vaadin.version>14.3.6</vaadin.version>
+		<sonar.projectKey>ruizrube_example-spring-vaadin14</sonar.projectKey>
+		<sonar.organization>ruizrube</sonar.organization>
+		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
 	</properties>
 
 	<parent>
@@ -58,15 +60,15 @@
 		</pluginRepository>
 	</pluginRepositories>
 
-<distributionManagement>
-    <repository>
-      <id>github</id>
-      <name>GitHub Packages</name>
-      <url>https://maven.pkg.github.com/ruizrube/example-spring-vaadin14</url>
-    </repository>
-  </distributionManagement>
-  
-  
+	<distributionManagement>
+		<repository>
+			<id>github</id>
+			<name>GitHub Packages</name>
+			<url>https://maven.pkg.github.com/ruizrube/example-spring-vaadin14</url>
+		</repository>
+	</distributionManagement>
+
+
 	<dependencyManagement>
 		<dependencies>
 			<dependency>

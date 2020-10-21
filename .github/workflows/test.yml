@@ -15,11 +15,7 @@ jobs:
        with:
          owner: ruizrube
          repo: example-spring-vaadin14
-    
-     - name: Set environment variables
-       uses: allenevans/set-env@v1.0.0
-       with:
-        JARO_NAME: '${{ steps.latest_version.outputs.latest_tag }}.jar'
+  
           
      - name: Example of consumption of the output
        env:

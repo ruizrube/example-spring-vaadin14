@@ -51,7 +51,7 @@ jobs:
     
     - name: Deploy to Github Packages Apache Maven
       working-directory: ./example-spring-vaadin14
-      run: mvn -B deploy
+      run: mvn -B -Pproduction deploy
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
         

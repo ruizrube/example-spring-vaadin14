@@ -41,13 +41,21 @@ jobs:
         key: ${{ runner.os }}-sonar
         restore-keys: ${{ runner.os }}-sonar
           
-    - name: Build and package with Maven, analyze with sonar and deploy to GitHub Packages Apache Maven
+    - name: Build and package with Maven
       working-directory: ./example-spring-vaadin14
-      run: mvn -B package org.sonarsource.scanner.maven:sonar-maven-plugin:sonar deploy
+      run: mvn -B package
+   
+    - name: Analyze with sonar
+      working-directory: ./example-spring-vaadin14
+      run: mvn -B org.sonarsource.scanner.maven:sonar-maven-plugin:sonar
       env:
-        GITHUB_USERNAME: ${{ secrets.GITHUB_USERNAME }}
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-
+    
+    - name: Deploy to Github Packages Apache Maven
+      working-directory: ./example-spring-vaadin14
+      run: mvn -B deploy
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
+      
 
     

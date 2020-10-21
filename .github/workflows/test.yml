@@ -1,0 +1,29 @@
+name: Test
+
+on: 
+  workflow_dispatch:
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+     - name: Get Latest Release
+      id: latest_version
+      uses: abatilo/release-info-action@v1.3.0
+      with:
+        owner: ruizrube
+        repo: example-spring-vaadin14
+    
+    - name: Set environment variables
+      uses: allenevans/set-env@v1.0.0
+      with:
+        JARO_NAME: '${{ steps.latest_version.outputs.latest_tag }}.jar'
+          
+    - name: Example of consumption of the output
+      env:
+        LATEST: ${{ steps.latest_version.outputs.latest_tag }}
+        LATEST_DATE: ${{ steps.latest_version.outputs.latest_tag_published_at }}
+      run: |
+        echo "Version $LATEST was released at $LATEST_DATE"

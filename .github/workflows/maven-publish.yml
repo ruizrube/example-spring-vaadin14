@@ -24,9 +24,7 @@ jobs:
       uses: actions/setup-java@v1
       with:
         java-version: 11
-        server-id: github # Value of the distributionManagement/repository/id field of the pom.xml
-        settings-path: ${{ github.workspace }} # location for the settings.xml file
-     
+      
     - name: Cache Maven packages
       uses: actions/cache@v2
       with:
@@ -56,6 +54,27 @@ jobs:
       run: mvn -B deploy
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
+        
+    - name: Get Latest Release
+      id: latest_version
+      uses: abatilo/release-info-action@v1.3.0
+      with:
+       owner: ruizrube
+       repo: example-spring-vaadin14
+
+    - name: Deploy to EB
+      env:
+        LATEST: ${{ steps.latest_version.outputs.latest_tag }}
+      uses: einaregilsson/beanstalk-deploy@v11
+      with:
+        aws_access_key: ${{ secrets.AWS_ACCESS_KEY }}
+        aws_secret_key: ${{ secrets.AWS_SECRET_KEY }}
+        application_name: example-spring-vaadin14
+        environment_name: ExampleSpringVaadin14-env
+        region: eu-west-3
+        deployment_package: "target/example-spring-vaadin14-${{ steps.latest_version.outputs.latest_tag }}.jar"
+        version_label: "my-app-${{ steps.latest_version.outputs.latest_tag }}"
+
       
 
     

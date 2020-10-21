@@ -6,7 +6,7 @@
 	<groupId>es.uca.iw</groupId>
 	<artifactId>example-spring-vaadin14</artifactId>
 	<name>Example Project</name>
-	<version>1.0-SNAPSHOT</version>
+	<version>1.0.1</version>
 	<packaging>jar</packaging>
 
 	<properties>

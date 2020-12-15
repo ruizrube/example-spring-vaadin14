@@ -70,7 +70,7 @@ jobs:
         aws_access_key: ${{ secrets.AWS_ACCESS_KEY }}
         aws_secret_key: ${{ secrets.AWS_SECRET_KEY }}
         application_name: example-spring-vaadin14
-        environment_name: ExampleSpringVaadin14-env-java11
+        environment_name: ExampleSpringVaadin14-env
         region: eu-west-3
         deployment_package: "./example-spring-vaadin14/target/example-spring-vaadin14-${{ steps.latest_version.outputs.latest_tag }}.jar"
         version_label: "example-spring-vaadin14-${{ steps.latest_version.outputs.latest_tag }}"

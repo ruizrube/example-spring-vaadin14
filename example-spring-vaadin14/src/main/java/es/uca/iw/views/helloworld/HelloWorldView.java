@@ -19,10 +19,14 @@ public class HelloWorldView extends HorizontalLayout {
 
     private TextField name;
     private Button sayHello;
+    
+    int variableUno;
+    int variableDos;
 
     public HelloWorldView() {
+    	int variableTres;
         setId("hello-world-view");
-        name = new TextField("What's your name? Tell me");
+        name = new TextField("Hola. ¿Cómo te llamas?");
         sayHello = new Button("Say hello");
         add(name, sayHello);
         setVerticalComponentAlignment(Alignment.END, name, sayHello);
